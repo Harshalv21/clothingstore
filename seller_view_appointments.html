@@ -1,0 +1,64 @@
+{% extends "seller_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-calendar-check me-2"></i>Appointments</h2>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            {% if appointments %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Product</th>
+                            <th>Staff</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appt in appointments %}
+                        <tr>
+                            <td>{{ appt.booking_date.strftime('%b %d, %Y') }}</td>
+                            <td>{{ appt.formatted_time }}</td>
+                            <td>{{ appt.user_name }}</td>
+                            <td>{{ appt.user_contact }}</td>
+                            <td>{{ appt.product_name }}</td>
+                            <td>{{ appt.staff_name }}</td>
+                            <td>
+                                <span class="status-badge status-{{ appt.status }}">
+                                    {{ appt.status|capitalize }}
+                                </span>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('seller_update_appointment_status', assignment_id=appt.assignment_id) }}" class="d-inline">
+                                    <select name="status" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
+                                        <option value="pending" {% if appt.status == 'pending' %}selected{% endif %}>Pending</option>
+                                        <option value="completed" {% if appt.status == 'completed' %}selected{% endif %}>Completed</option>
+                                        <option value="cancelled" {% if appt.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-calendar-times fa-4x text-muted mb-4"></i>
+                <h4>No delivery found</h4>
+                <p class="text-muted">Your appointments will appear here when customers book fittings</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

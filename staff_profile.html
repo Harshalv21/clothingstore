@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-user-cog me-2"></i>My Profile</h2>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <div class="avatar-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; border-radius: 50%;">
+                            <i class="fas fa-user-tie fa-3x text-primary"></i>
+                        </div>
+                    </div>
+                    <h4 class="mb-1">{{ staff.staff_name }}</h4>
+                    <p class="text-muted mb-2">{{ staff.staff_id }}</p>
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-store me-1"></i>{{ staff.seller_name }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="staff_id" class="form-label">Staff ID</label>
+                                <input type="text" class="form-control" id="staff_id" value="{{ staff.staff_id }}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="staff_name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="staff_name" name="staff_name" value="{{ staff.staff_name }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="Male" {% if staff.gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if staff.gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if staff.gender == 'Other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="shift_timing" class="form-label">Shift Timing</label>
+                                <select class="form-select" id="shift_timing" name="shift_timing" required>
+                                    <option value="Morning (9AM-5PM)" {% if staff.shift_timing == 'Morning (9AM-5PM)' %}selected{% endif %}>Morning (9AM-5PM)</option>
+                                    <option value="Evening (2PM-10PM)" {% if staff.shift_timing == 'Evening (2PM-10PM)' %}selected{% endif %}>Evening (2PM-10PM)</option>
+                                    <option value="Full Day" {% if staff.shift_timing == 'Full Day' %}selected{% endif %}>Full Day</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comfortable_working_with" class="form-label">Comfortable Working With</label>
+                            <select class="form-select" id="comfortable_working_with" name="comfortable_working_with" required>
+                                <option value="All Genders" {% if staff.comfortable_working_with == 'All Genders' %}selected{% endif %}>All Genders</option>
+                                <option value="Male Only" {% if staff.comfortable_working_with == 'Male Only' %}selected{% endif %}>Male Only</option>
+                                <option value="Female Only" {% if staff.comfortable_working_with == 'Female Only' %}selected{% endif %}>Female Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" value="{{ staff.password }}" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Update Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

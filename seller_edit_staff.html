@@ -1,0 +1,121 @@
+{% extends "seller_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-user-edit me-2"></i>Edit Staff Member</h2>
+        <a href="{{ url_for('seller_view_staff') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Staff
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="staff_name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="staff_name" name="staff_name" value="{{ staff.staff_name }}" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="Male" {% if staff.gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if staff.gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if staff.gender == 'Other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="shift_timing" class="form-label">Shift Timing</label>
+                                <select class="form-select" id="shift_timing" name="shift_timing" required>
+                                    <option value="Morning (9AM-5PM)" {% if staff.shift_timing == 'Morning (9AM-5PM)' %}selected{% endif %}>Morning (9AM-5PM)</option>
+                                    <option value="Evening (2PM-10PM)" {% if staff.shift_timing == 'Evening (2PM-10PM)' %}selected{% endif %}>Evening (2PM-10PM)</option>
+                                    <option value="Full Day" {% if staff.shift_timing == 'Full Day' %}selected{% endif %}>Full Day</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="speciality" class="form-label">Speciality</label>
+                            <input type="text" class="form-control" id="speciality" name="speciality" value="{{ staff.speciality }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comfortable_working_with" class="form-label">Comfortable Working With</label>
+                            <select class="form-select" id="comfortable_working_with" name="comfortable_working_with" required>
+                                <option value="All Genders" {% if staff.comfortable_working_with == 'All Genders' %}selected{% endif %}>All Genders</option>
+                                <option value="Male Only" {% if staff.comfortable_working_with == 'Male Only' %}selected{% endif %}>Male Only</option>
+                                <option value="Female Only" {% if staff.comfortable_working_with == 'Female Only' %}selected{% endif %}>Female Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="salary" class="form-label">Salary (₹)</label>
+                                <input type="number" step="0.01" class="form-control" id="salary" name="salary" value="{{ staff.salary }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" value="{{ staff.password }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Update Staff Member
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fas fa-user-circle me-2"></i>Staff Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="avatar-circle mb-3">
+                            <i class="fas fa-user-tie fa-3x text-muted"></i>
+                        </div>
+                        <h4>{{ staff.staff_name }}</h4>
+                        <p class="text-muted">{{ staff.staff_id }}</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Join Date</h6>
+                            <p>{{ staff.join_date.strftime('%b %d, %Y') }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Speciality</h6>
+                            <p>{{ staff.speciality }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Shift</h6>
+                            <p>{{ staff.shift_timing }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Salary</h6>
+                            <p>₹{{ "%.2f"|format(staff.salary) }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <h6 class="text-muted">Comfortable Working With</h6>
+                        <p>{{ staff.comfortable_working_with }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

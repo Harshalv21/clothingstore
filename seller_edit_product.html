@@ -1,0 +1,131 @@
+{% extends "seller_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-edit me-2"></i>Edit Product</h2>
+        <a href="{{ url_for('seller_view_products') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Products
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="product_name" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="product_name" name="product_name" value="{{ product.product_name }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_type" class="form-label">Product Type</label>
+                                <select class="form-select" id="product_type" name="product_type" required>
+                                    <option value="Shirt" {% if product.product_type == 'Shirt' %}selected{% endif %}>Shirt</option>
+                                    <option value="Pants" {% if product.product_type == 'Pants' %}selected{% endif %}>Pants</option>
+                                    <option value="Dress" {% if product.product_type == 'Dress' %}selected{% endif %}>Dress</option>
+                                    <option value="Suit" {% if product.product_type == 'Suit' %}selected{% endif %}>Suit</option>
+                                    <option value="Jacket" {% if product.product_type == 'Jacket' %}selected{% endif %}>Jacket</option>
+                                    <option value="Skirt" {% if product.product_type == 'Skirt' %}selected{% endif %}>Skirt</option>
+                                    <option value="Blouse" {% if product.product_type == 'Blouse' %}selected{% endif %}>Blouse</option>
+                                    <option value="Jeans" {% if product.product_type == 'Jeans' %}selected{% endif %}>Jeans</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="product_size" class="form-label">Size</label>
+                                <select class="form-select" id="product_size" name="product_size" required>
+                                    <option value="XS" {% if product.product_size == 'XS' %}selected{% endif %}>XS</option>
+                                    <option value="S" {% if product.product_size == 'S' %}selected{% endif %}>S</option>
+                                    <option value="M" {% if product.product_size == 'M' %}selected{% endif %}>M</option>
+                                    <option value="L" {% if product.product_size == 'L' %}selected{% endif %}>L</option>
+                                    <option value="XL" {% if product.product_size == 'XL' %}selected{% endif %}>XL</option>
+                                    <option value="XXL" {% if product.product_size == 'XXL' %}selected{% endif %}>XXL</option>
+                                    <option value="Custom" {% if product.product_size == 'Custom' %}selected{% endif %}>Custom</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_price" class="form-label">Price (₹)</label>
+                                <input type="number" step="0.01" class="form-control" id="product_price" name="product_price" value="{{ product.product_price }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="brand" class="form-label">Brand</label>
+                                <input type="text" class="form-control" id="brand" name="brand" value="{{ product.brand }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_occasion" class="form-label">Occasion</label>
+                                <select class="form-select" id="product_occasion" name="product_occasion" required>
+                                    <option value="Casual" {% if product.product_occasion == 'Casual' %}selected{% endif %}>Casual</option>
+                                    <option value="Formal" {% if product.product_occasion == 'Formal' %}selected{% endif %}>Formal</option>
+                                    <option value="Party" {% if product.product_occasion == 'Party' %}selected{% endif %}>Party</option>
+                                    <option value="Wedding" {% if product.product_occasion == 'Wedding' %}selected{% endif %}>Wedding</option>
+                                    <option value="Sports" {% if product.product_occasion == 'Sports' %}selected{% endif %}>Sports</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="product_fit" class="form-label">Fit</label>
+                            <select class="form-select" id="product_fit" name="product_fit" required>
+                                <option value="Regular" {% if product.product_fit == 'Regular' %}selected{% endif %}>Regular</option>
+                                <option value="Slim" {% if product.product_fit == 'Slim' %}selected{% endif %}>Slim</option>
+                                <option value="Loose" {% if product.product_fit == 'Loose' %}selected{% endif %}>Loose</option>
+                                <option value="Skinny" {% if product.product_fit == 'Skinny' %}selected{% endif %}>Skinny</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="product_image" class="form-label">Product Image</label>
+                            {% if product.full_image_path %}
+                            <div class="mb-3">
+                                <img src="{{ product.full_image_path }}" class="img-thumbnail mb-2" style="max-height: 200px;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remove_image" name="remove_image">
+                                    <label class="form-check-label" for="remove_image">
+                                        Remove current image
+                                    </label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <input class="form-control" type="file" id="product_image" name="product_image" accept="image/*">
+                            <small class="text-muted">Leave blank to keep current image</small>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Update Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fas fa-image me-2"></i>Current Image</h5>
+                </div>
+                <div class="card-body text-center">
+                    {% if product.full_image_path %}
+                    <img src="{{ product.full_image_path }}" class="img-fluid rounded mb-3" alt="{{ product.product_name }}">
+                    {% else %}
+                    <div class="bg-secondary p-5 rounded mb-3">
+                        <i class="fas fa-tshirt fa-4x text-muted"></i>
+                    </div>
+                    {% endif %}
+                    <h5>{{ product.product_name }}</h5>
+                    <p class="text-muted">{{ product.product_type }} • {{ product.product_size }}</p>
+                    <h4>₹{{ "%.2f"|format(product.product_price) }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

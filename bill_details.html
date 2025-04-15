@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .bill-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .bill-info p {
+            margin: 5px 0;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            .bill-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bill Details</h2>
+
+        <div class="bill-info">
+            <p><strong>Bill ID:</strong> <span class="highlight">{{ bill.bill_id }}</span></p>
+            <p><strong>Billing Date:</strong> {{ bill.billing_date }}</p>
+            <p><strong>Amount Paid:</strong> ₹{{ bill.amount }}</p>
+            <p><strong>Payment Method:</strong> {{ bill.payment_method }}</p>
+        </div>
+
+        <div class="section">
+            <h3>User Details</h3>
+            <div class="bill-info">
+                <p><strong>Name:</strong> {{ bill.user_name }}</p>
+                <p><strong>Contact:</strong> {{ bill.user_contact }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Product Details</h3>
+            <div class="bill-info">
+                <p><strong>Product Name:</strong> {{ bill.product_name }}</p>
+                <p><strong>Brand:</strong> {{ bill.brand }}</p>
+                <p><strong>Price:</strong> ₹{{ bill.product_price }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Staff Details</h3>
+            <div class="bill-info">
+                <p><strong>Assigned Staff:</strong> {{ bill.staff_name }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Seller Details</h3>
+            <div class="bill-info">
+                <p><strong>Seller Name:</strong> {{ bill.seller_name }}</p>
+                <p><strong>Location:</strong> {{ bill.seller_location }}</p>
+            </div>
+        </div>
+
+        <a href="{{ url_for('view_bills') }}" class="back-btn">Back to Bills</a>
+    </div>
+
+</body>
+</html>

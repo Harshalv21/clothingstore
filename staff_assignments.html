@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Staff</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">Your Assignments</h2>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in assignments %}
+                <tr>
+                    <!-- Ensure booking_date is a date object -->
+                    <td>{{ assignment.booking_date.strftime('%d-%m-%Y') }}</td>
+                    
+                    <!-- Use formatted_time (already formatted in SQL query) -->
+                    <td>{{ assignment.formatted_time }}</td>
+                    
+                    <td>{{ assignment.user_name }}</td>
+                    <td>{{ assignment.product_name }}</td>
+                    <td>
+                        {% if assignment.status == 'completed' %}
+                            <span class="badge bg-success">Completed</span>
+                        {% else %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('staff_assignment_details', assignment_id=assignment.assignment_id) }}" class="btn btn-sm btn-info">View</a>
+                        {% if assignment.status == 'pending' %}
+                            <a href="{{ url_for('staff_create_bill', order_item_id=assignment.order_item_id) }}" class="btn btn-sm btn-success">Create Bill</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

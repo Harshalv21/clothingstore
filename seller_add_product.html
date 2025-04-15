@@ -1,0 +1,130 @@
+{% extends "seller_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-plus-circle me-2"></i>Add Product</h2>
+        <a href="{{ url_for('seller_view_products') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Products
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="product_name" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="product_name" name="product_name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_type" class="form-label">Product Type</label>
+                                <select class="form-select" id="product_type" name="product_type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Shirt">Shirt</option>
+                                    <option value="Pants">Pants</option>
+                                    <option value="Tshirt">Tshirt</option>
+                                    <option value="Suit">Jersey</option>
+                                    <option value="Jacket">Jacket</option>
+                                    <option value="Skirt">Skirt</option>
+                                    <option value="Hoodies">Hoodies</option>
+                                    <option value="Jeans">Jeans</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="product_size" class="form-label">Size</label>
+                                <select class="form-select" id="product_size" name="product_size" required>
+                                    <option value="">Select Size</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="Custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_price" class="form-label">Price (₹)</label>
+                                <input type="number" step="0.01" class="form-control" id="product_price" name="product_price" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="brand" class="form-label">Brand</label>
+                                <input type="text" class="form-control" id="brand" name="brand" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="product_occasion" class="form-label">Occasion</label>
+                                <select class="form-select" id="product_occasion" name="product_occasion" required>
+                                    <option value="Casual">Casual</option>
+                                    <option value="Formal">Formal</option>
+                                    <option value="Party">Party</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option value="Sports">Sports</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="product_fit" class="form-label">Fit</label>
+                            <select class="form-select" id="product_fit" name="product_fit" required>
+                                <option value="Regular">Regular</option>
+                                <option value="Slim">Slim</option>
+                                <option value="Loose">Loose</option>
+                                <option value="Skinny">Skinny</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="product_image" class="form-label">Product Image</label>
+                            <input class="form-control" type="file" id="product_image" name="product_image" accept="image/*" required>
+                            <small class="text-muted">Allowed formats: JPG, PNG, GIF (Max 5MB)</small>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Save Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Product Guidelines</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Use high-quality images with white background
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Provide accurate size and fit information
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Set competitive pricing based on market
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Include all relevant product details
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

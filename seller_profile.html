@@ -1,0 +1,68 @@
+{% extends "seller_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-user-cog me-2"></i>Profile Settings</h2>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <div class="avatar-circle mb-3">
+                            <i class="fas fa-store fa-3x text-muted"></i>
+                        </div>
+                        <h4>{{ seller.seller_name }}</h4>
+                        <p class="text-muted">{{ seller.seller_id }}</p>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-camera me-2"></i>Change Logo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Account Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="seller_name" class="form-label">Store Name</label>
+                                <input type="text" class="form-control" id="seller_name" name="seller_name" value="{{ seller.seller_name }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="seller_location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="seller_location" name="seller_location" value="{{ seller.seller_location }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ seller.email }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" value="{{ seller.password }}" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Update Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
